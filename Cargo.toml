@@ -17,3 +17,6 @@ categories = ["cryptography::cryptocurrencies"]
 [workspace.dependencies]
 ethereum_ssz = { version = "0.10.4", path = "ssz" }
 ethereum_ssz_derive = { version = "0.10.4", path = "ssz_derive" }
+
+[patch.crates-io]
+ethereum_serde_utils = { git = "https://github.com/polytope-labs/ethereum_serde_utils", rev = "b67233cce50833e2082ebcb16a9971df063c7ecb" }
