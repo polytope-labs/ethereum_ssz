@@ -46,6 +46,8 @@ mod decode;
 mod encode;
 pub mod legacy;
 mod union_selector;
+#[cfg(feature = "scale")]
+mod scale;
 
 #[cfg(feature = "context_deserialize")]
 mod context_deserialize;
