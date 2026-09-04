@@ -30,8 +30,8 @@ impl<N: Unsigned + Clone> Encode for Bitfield<Variable<N>> {
 impl<N: Unsigned + Clone> Decode for Bitfield<Variable<N>> {
     fn decode<I: Input>(input: &mut I) -> Result<Self, Error> {
         let bits: Vec<bool> = Decode::decode(input)?;
-        let mut out = Self::with_capacity(bits.len())
-            .map_err(|_| Error::from("BitList: invalid length"))?;
+        let mut out =
+            Self::with_capacity(bits.len()).map_err(|_| Error::from("BitList: invalid length"))?;
         for (i, bit) in bits.into_iter().enumerate() {
             out.set(i, bit)
                 .map_err(|_| Error::from("BitList: invalid length"))?;
@@ -110,7 +110,10 @@ mod tests {
     #[test]
     fn bit_vector_round_trips() {
         let value = bits(&[true, false, true, true, false, false, false, true]);
-        assert_eq!(BitVector::<U8>::decode(&mut &value.encode()[..]).unwrap(), value);
+        assert_eq!(
+            BitVector::<U8>::decode(&mut &value.encode()[..]).unwrap(),
+            value
+        );
     }
 
     #[test]
