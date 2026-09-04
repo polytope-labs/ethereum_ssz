@@ -81,6 +81,12 @@ impl Decode for ProgressiveBitList {
     }
 }
 
+// See the note in `ssz_types`: `EncodeLike` is what lets these be passed by reference into the
+// Substrate storage APIs. The encoding is `Vec<bool>` in every case, matching `ssz-rs`.
+impl<N: Unsigned + Clone> codec::EncodeLike for Bitfield<Variable<N>> {}
+impl<N: Unsigned + Clone> codec::EncodeLike for Bitfield<Fixed<N>> {}
+impl codec::EncodeLike for ProgressiveBitList {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -105,6 +111,21 @@ mod tests {
         assert_eq!(encoded, values.to_vec().encode());
         // 8 bits is one byte packed, but 8 bytes plus a compact length prefix here.
         assert_eq!(encoded.len(), 9);
+    }
+
+    /// The reference-passing case the review flagged, mirroring `ssz_types`.
+    #[test]
+    fn bitfields_can_be_passed_by_reference() {
+        fn put<T: Encode, E: codec::EncodeLike<T>>(value: E) -> Vec<u8> {
+            value.encode()
+        }
+
+        let value = bits(&[true, false, true, true, false, false, false, true]);
+        assert_eq!(put::<BitVector<U8>, _>(&value), value.encode());
+
+        let mut list = BitList::<U16>::with_capacity(12).unwrap();
+        list.set(0, true).unwrap();
+        assert_eq!(put::<BitList<U16>, _>(&list), list.encode());
     }
 
     #[test]
