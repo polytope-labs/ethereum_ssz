@@ -19,4 +19,4 @@ ethereum_ssz = { version = "0.10.4", path = "ssz" }
 ethereum_ssz_derive = { version = "0.10.4", path = "ssz_derive" }
 
 [patch.crates-io]
-ethereum_serde_utils = { git = "https://github.com/polytope-labs/ethereum_serde_utils", rev = "6f4ab738574da2e3a0204bb6d2521c14faee5b32" }
+ethereum_serde_utils = { git = "https://github.com/polytope-labs/ethereum_serde_utils", rev = "5d953c2f15b1f52c67529b117b4878d946f9295d" }
