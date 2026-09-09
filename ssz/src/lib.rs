@@ -46,8 +46,6 @@ mod bitfield;
 mod decode;
 mod encode;
 pub mod legacy;
-#[cfg(feature = "scale")]
-mod scale;
 mod union_selector;
 
 #[cfg(feature = "context_deserialize")]
