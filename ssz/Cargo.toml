@@ -15,9 +15,8 @@ name = "ssz"
 
 [features]
 default = ["std"]
-std = ["alloy-primitives/std", "ethereum_serde_utils/std", "serde/std", "itertools/use_std", "codec?/std"]
+std = ["alloy-primitives/std", "ethereum_serde_utils/std", "serde/std", "itertools/use_std"]
 arbitrary = ["dep:arbitrary", "alloy-primitives/arbitrary"]
-scale = ["dep:codec"]
 context_deserialize = ["dep:context_deserialize"]
 
 [dependencies]
@@ -28,7 +27,6 @@ itertools = { version = "0.14", default-features = false, features = ["use_alloc
 serde = { version = "1", default-features = false, features = ["alloc"] }
 serde_derive = "1"
 typenum = { version = "1", default-features = false }
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"], optional = true }
 arbitrary = { version = "1", features = ["derive"], optional = true }
 context_deserialize = { version = "0.2", optional = true }
 
